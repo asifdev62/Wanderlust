@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white text-neutral-900">
-      <div className="mx-auto grid h-12 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto grid h-12 max-w-360 grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
         <nav
           aria-label="Main navigation"
           className="hidden items-center gap-7 lg:flex"

@@ -19,10 +19,10 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white text-neutral-900">
-      <div className="mx-auto grid h-20 max-w-360 grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto grid h-12 max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-5 sm:px-8 lg:px-10">
         <nav
           aria-label="Main navigation"
-          className="hidden items-center gap-7 md:flex"
+          className="hidden items-center gap-7 lg:flex"
         >
           {navItems.map((item, index) => (
             <Link
@@ -46,7 +46,7 @@ export function Navbar() {
           aria-expanded={menuOpen}
           aria-controls="mobile-navigation"
           onClick={() => setMenuOpen((open) => !open)}
-          className="justify-self-start p-1 md:hidden"
+          className="justify-self-start p-1 lg:hidden"
         >
           {menuOpen ? (
             <X className="size-5" strokeWidth={1.75} />
@@ -71,7 +71,7 @@ export function Navbar() {
           />
         </Link>
 
-        <div className="hidden items-center justify-self-end gap-6 md:flex lg:gap-7">
+        <div className="hidden items-center justify-self-end gap-6 lg:flex lg:gap-7">
           <Link
             href="#profile"
             className="flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-brand"
@@ -95,7 +95,7 @@ export function Navbar() {
 
         <Link
           href="#login"
-          className="justify-self-end text-sm font-medium md:hidden"
+          className="justify-self-end text-sm font-medium lg:hidden"
         >
           Login
         </Link>
@@ -104,7 +104,7 @@ export function Navbar() {
       {menuOpen && (
         <div
           id="mobile-navigation"
-          className="absolute inset-x-0 top-full border-t border-neutral-200 bg-white px-5 pb-5 pt-2 shadow-lg md:hidden"
+          className="absolute inset-x-0 top-full border-t border-neutral-200 bg-white px-5 pb-5 pt-2 shadow-lg lg:hidden"
         >
           <nav aria-label="Mobile navigation" className="flex flex-col">
             {navItems.map((item, index) => (

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export function Cta() {
   return (
@@ -27,7 +28,7 @@ export function Cta() {
         <p className="mt-2 text-[10px] text-white/90 lg:text-sm">
           Join thousands of travelers who have discovered the world with us
         </p>
-
+        <Link href={"/destinations"}>
         <button
           type="button"
           className="group mt-6 flex h-10 w-[272px] max-w-full items-center justify-between bg-white px-5 text-[10px] font-semibold tracking-[0.08em] text-neutral-900 uppercase transition-colors hover:bg-brand hover:text-white lg:mt-8 lg:h-14 lg:w-[330px] lg:px-8 lg:text-xs"
@@ -38,6 +39,7 @@ export function Cta() {
             strokeWidth={1.8}
           />
         </button>
+        </Link>
       </div>
     </section>
   );

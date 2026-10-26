@@ -6,7 +6,6 @@ import {
   Check,
   MapPin,
   Star,
-  X,
 } from "lucide-react";
 
 import {
@@ -18,7 +17,8 @@ import {
 } from "@/lib/destinations";
 
 import { BookingPanel } from "./booking-panel";
-import EditDestinationDialog from "../EditDestinationDialog";
+import { DeleteDestinationDialog } from "../delete-destination-dialog";
+import { EditDestinationDialog } from "../edit-destination-dialog";
 
 export function DestinationDetails({
   destination,
@@ -47,13 +47,7 @@ export function DestinationDetails({
         <div className="flex items-center gap-2.5">
           <EditDestinationDialog destination={destination} />
 
-          <Link
-            href="/destinations"
-            className="inline-flex h-9 items-center gap-2 border border-neutral-200 bg-white px-3.5 text-xs font-medium text-neutral-600 transition-colors hover:border-neutral-300 hover:text-brand"
-          >
-            <X aria-hidden="true" className="size-3.5" strokeWidth={1.7} />
-            Close
-          </Link>
+          <DeleteDestinationDialog id={destination._id} />
         </div>
       </div>
 

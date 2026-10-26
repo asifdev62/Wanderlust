@@ -154,7 +154,7 @@ const EditDestinationDialog = ({ destination }: EditDestinationDialogProps) => {
         render={
           <Button
             variant="outline"
-            className="h-9 gap-2 rounded-lg border-neutral-200 bg-white px-3 text-xs font-medium text-neutral-700 shadow-none transition-all hover:border-brand hover:bg-neutral-50 hover:text-brand"
+            className="h-9 rounded-none gap-2 border-neutral-200 bg-white px-4 text-xs font-medium text-neutral-700 shadow-none transition-all hover:border-brand hover:bg-neutral-50 hover:text-brand"
           >
             <Pencil
               aria-hidden="true"

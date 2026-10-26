@@ -28,7 +28,7 @@ export function DestinationsExplorerSkeleton() {
         <div className="mt-5 grid gap-x-6 gap-y-9 sm:grid-cols-2 lg:grid-cols-3 lg:gap-x-7 lg:gap-y-10">
           {Array.from({ length: 6 }).map((_, index) => (
             <div key={index} className="animate-pulse">
-              <div className="aspect-[8/5] bg-neutral-100" />
+              <div className=" `aspect-[8/5] `bg-neutral-100" />
               <div className="pt-4">
                 <div className="h-2.5 w-16 bg-neutral-100" />
                 <div className="mt-2.5 h-4 w-3/5 bg-neutral-100" />

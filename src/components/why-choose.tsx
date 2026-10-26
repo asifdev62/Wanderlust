@@ -27,7 +27,7 @@ export function WhyChoose() {
       <div className="mx-auto max-w-[1200px]">
         <div className="text-center">
           <h2 className="text-3xl font-normal tracking-[-0.01em] text-neutral-900 lg:text-5xl">
-            Why Choose Wanderlust
+            Why Choose Wanderlast
           </h2>
           <p className="mt-2 text-xs text-neutral-500 lg:text-base">
             Your trusted partner for exceptional travel experiences

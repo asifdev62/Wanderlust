@@ -10,22 +10,19 @@ const JosefinSans = Josefin_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Wonderlast — Discover Your Next Adventure",
+  title: "Wanderlast — Discover Your Next Adventure",
   description:
     "Explore breathtaking destinations and create unforgettable memories with our curated travel experiences.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="en"
-      className={`${JosefinSans.variable} h-full antialiased`}
-    >
+    <html lang="en" className={`${JosefinSans.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
         <Navbar />
         {children}
         <Footer />
-        </body>
+      </body>
     </html>
   );
 }

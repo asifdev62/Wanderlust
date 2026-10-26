@@ -5,7 +5,7 @@ import { WhyChoose } from "@/components/why-choose";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col">
+    <main className="flex flex-1 flex-col">
       <Banner />
       <WhyChoose />
       <Testimonials />

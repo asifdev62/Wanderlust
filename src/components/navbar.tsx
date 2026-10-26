@@ -2,8 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, UserRound, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -15,8 +16,35 @@ const navItems = [
   { label: "Admin", href: "#admin" },
 ];
 
+function isActivePath(pathname: string, href: string) {
+  if (!href.startsWith("/")) {
+    return false;
+  }
+
+  return href === "/"
+    ? pathname === "/"
+    : pathname === href || pathname.startsWith(`${href}/`);
+}
+
 export function Navbar() {
+  const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return;
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [menuOpen]);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white text-neutral-900">
@@ -25,14 +53,14 @@ export function Navbar() {
           aria-label="Main navigation"
           className="hidden items-center gap-7 lg:flex"
         >
-          {navItems.map((item, index) => (
+          {navItems.map((item) => (
             <Link
               key={item.label}
               href={item.href}
-              aria-current={index === 0 ? "page" : undefined}
+              aria-current={isActivePath(pathname, item.href) ? "page" : undefined}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-brand",
-                index === 0 &&
+                isActivePath(pathname, item.href) &&
                   "text-brand underline decoration-2 underline-offset-[7px]"
               )}
             >
@@ -50,15 +78,15 @@ export function Navbar() {
           className="justify-self-start p-1 lg:hidden"
         >
           {menuOpen ? (
-            <X className="size-5" strokeWidth={1.75} />
+            <X aria-hidden="true" className="size-5" strokeWidth={1.75} />
           ) : (
-            <Menu className="size-5" strokeWidth={1.75} />
+            <Menu aria-hidden="true" className="size-5" strokeWidth={1.75} />
           )}
         </button>
 
         <Link
           href="/"
-          aria-label="Wonderlast home"
+          aria-label="Wanderlast home"
           className="justify-self-center"
           onClick={() => setMenuOpen(false)}
         >
@@ -77,7 +105,11 @@ export function Navbar() {
             href="#profile"
             className="flex items-center gap-1.5 text-sm font-medium transition-colors hover:text-brand"
           >
-            <UserRound className="size-4" strokeWidth={1.8} />
+            <UserRound
+              aria-hidden="true"
+              className="size-4"
+              strokeWidth={1.8}
+            />
             Profile
           </Link>
           <Link
@@ -105,18 +137,20 @@ export function Navbar() {
       {menuOpen && (
         <div
           id="mobile-navigation"
-          className="absolute inset-x-0 top-full border-t border-neutral-200 bg-white px-5 pb-5 pt-2 shadow-lg lg:hidden"
+          className="absolute inset-x-0 top-full border-t border-neutral-200 bg-white px-5 pt-2 pb-5 shadow-lg lg:hidden"
         >
           <nav aria-label="Mobile navigation" className="flex flex-col">
-            {navItems.map((item, index) => (
+            {navItems.map((item) => (
               <Link
                 key={item.label}
                 href={item.href}
-                aria-current={index === 0 ? "page" : undefined}
+                aria-current={
+                  isActivePath(pathname, item.href) ? "page" : undefined
+                }
                 onClick={() => setMenuOpen(false)}
                 className={cn(
                   "border-b border-neutral-100 py-3 text-sm font-medium",
-                  index === 0 && "text-brand"
+                  isActivePath(pathname, item.href) && "text-brand"
                 )}
               >
                 {item.label}

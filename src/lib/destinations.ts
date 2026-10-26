@@ -15,6 +15,91 @@ export type SelectOption = {
   label: string;
 };
 
+const DEFAULT_API_BASE_URL = "http://localhost:5000";
+
+const apiBaseUrl = (
+  process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || DEFAULT_API_BASE_URL
+).replace(/\/+$/, "");
+
+export const DESTINATIONS_API_URL = `${apiBaseUrl}/destination`;
+export const ADD_DESTINATION_API_URL = `${apiBaseUrl}/add-destination`;
+
+export function getDestinationUrl(id: string) {
+  return `${DESTINATIONS_API_URL}/${encodeURIComponent(id)}`;
+}
+
+function toText(value: unknown) {
+  if (typeof value === "string") {
+    return value;
+  }
+
+  if (typeof value === "number" && Number.isFinite(value)) {
+    return String(value);
+  }
+
+  return null;
+}
+
+/**
+ * Normalizes a record returned by the Express/MongoDB API into a Destination.
+ * Returns null when required fields are missing or have an unusable type.
+ */
+export function normalizeDestination(value: unknown): Destination | null {
+  if (typeof value !== "object" || value === null) {
+    return null;
+  }
+
+  const record = value as Record<string, unknown>;
+
+  const id = toText(record._id);
+  const destinationName = toText(record.destinationName);
+  const imageUrl = toText(record.imageUrl);
+
+  if (!id || !destinationName || !imageUrl) {
+    return null;
+  }
+
+  return {
+    _id: id,
+    destinationName,
+    country: toText(record.country) ?? "",
+    category: toText(record.category) ?? "",
+    price: toText(record.price) ?? "0",
+    duration: toText(record.duration) ?? "",
+    departureDate: toText(record.departureDate) ?? "",
+    imageUrl,
+    description: toText(record.description) ?? "",
+  };
+}
+
+export function getApiErrorMessage(payload: unknown, fallback: string) {
+  if (
+    typeof payload === "object" &&
+    payload !== null &&
+    "message" in payload &&
+    typeof payload.message === "string" &&
+    payload.message.trim()
+  ) {
+    return payload.message;
+  }
+
+  return fallback;
+}
+
+export async function readJsonResponse(response: Response): Promise<unknown> {
+  const body = await response.text();
+
+  if (!body) {
+    return null;
+  }
+
+  try {
+    return JSON.parse(body) as unknown;
+  } catch {
+    return null;
+  }
+}
+
 export function getDestinationPrice(price: string | number) {
   const amount =
     typeof price === "number" ? price : Number(price.replace(/[^0-9.]/g, ""));
@@ -50,6 +135,22 @@ export function formatDestinationDuration(duration: string) {
   }`;
 }
 
+/**
+ * Reads the leading number from either "7" or "7 Days / 6 Nights".
+ * Values without a number sort last.
+ */
+export function getDestinationDurationDays(duration: string) {
+  const match = duration.match(/\d+/);
+
+  if (!match) {
+    return Number.POSITIVE_INFINITY;
+  }
+
+  const days = Number(match[0]);
+
+  return Number.isFinite(days) ? days : Number.POSITIVE_INFINITY;
+}
+
 export function getDestinationRating(id: string) {
   const hash = Array.from(id).reduce(
     (total, character) => total + character.charCodeAt(0),
@@ -69,7 +170,8 @@ export function getDestinationReviewCount(id: string) {
 }
 
 export function formatDepartureDate(date: string) {
-  const [year, month, day] = date.split("-");
+  const datePart = date.split("T")[0] ?? "";
+  const [year, month, day] = datePart.split("-");
 
   if (!year || !month || !day) {
     return date;

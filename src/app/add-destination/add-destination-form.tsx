@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { PackagePlus, X } from "lucide-react";
+import { LoaderCircle, PackagePlus, X } from "lucide-react";
 import { useState, type FormEvent } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -16,6 +16,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  ADD_DESTINATION_API_URL,
+  getApiErrorMessage,
+  readJsonResponse,
+} from "@/lib/destinations";
 import { cn } from "@/lib/utils";
 
 const categories = [
@@ -34,6 +39,7 @@ const labelClassName = "text-xs font-semibold text-neutral-800";
 
 export function AddDestinationForm() {
   const [category, setCategory] = useState("beach");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState<{
     tone: "success" | "error";
     message: string;
@@ -42,25 +48,41 @@ export function AddDestinationForm() {
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
+    if (isSubmitting) {
+      return;
+    }
+
     const form = event.currentTarget;
     const data = Object.fromEntries(new FormData(form).entries());
 
+    setIsSubmitting(true);
+    setStatus(null);
+
     try {
-      const res = await fetch("http://localhost:5000/add-destination", {
+      const res = await fetch(ADD_DESTINATION_API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+        signal: AbortSignal.timeout(15000),
       });
 
-      const responseData = await res.json();
+      const responseData = await readJsonResponse(res);
 
       if (!res.ok) {
-        throw new Error(responseData?.message ?? "Could not add destination.");
+        throw new Error(
+          getApiErrorMessage(
+            responseData,
+            `Could not add destination (${res.status}).`
+          )
+        );
       }
 
-      setStatus({ tone: "success", message: "Travel package added successfully." });
+      setStatus({
+        tone: "success",
+        message: "Travel package added successfully.",
+      });
       form.reset();
       setCategory("beach");
     } catch (error) {
@@ -71,16 +93,22 @@ export function AddDestinationForm() {
             ? error.message
             : "Could not reach the server. Please try again.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
   return (
-    <Card className="w-full max-w-[520px] gap-0 border border-neutral-200 bg-white py-0 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-0">
-      <form onSubmit={handleSubmit} className="flex flex-col">
+    <Card className="w-full max-w-130 gap-0 border border-neutral-200 bg-white py-0 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-0">
+      <form
+        onSubmit={handleSubmit}
+        aria-busy={isSubmitting}
+        className="flex flex-col"
+      >
         <CardContent className="flex flex-col gap-4 px-6 py-6 sm:px-7">
           {status && (
             <p
-              role="status"
+              role={status.tone === "error" ? "alert" : "status"}
               className={cn(
                 "rounded-md border px-3 py-2 text-xs font-medium",
                 status.tone === "success"
@@ -240,10 +268,18 @@ export function AddDestinationForm() {
 
           <Button
             type="submit"
-            className="h-9 justify-center gap-2 rounded-md bg-brand px-4 text-xs font-medium text-white hover:bg-brand-dark"
+            disabled={isSubmitting}
+            className="h-9 justify-center gap-2 rounded-md bg-brand px-4 text-xs font-medium text-white hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-60"
           >
-            <PackagePlus className="size-4" strokeWidth={1.8} />
-            Add Travel Package
+            {isSubmitting ? (
+              <LoaderCircle
+                aria-hidden="true"
+                className="size-4 animate-spin"
+              />
+            ) : (
+              <PackagePlus aria-hidden="true" className="size-4" strokeWidth={1.8} />
+            )}
+            {isSubmitting ? "Adding..." : "Add Travel Package"}
           </Button>
         </CardFooter>
       </form>

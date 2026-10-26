@@ -4,36 +4,28 @@ import { cache } from "react";
 import { CloudOff } from "lucide-react";
 import Link from "next/link";
 
-import type { Destination } from "@/lib/destinations";
+import {
+  getDestinationUrl,
+  normalizeDestination,
+  type Destination,
+} from "@/lib/destinations";
 
 import { DestinationDetails } from "./destination-details";
-
-const DESTINATIONS_API = "http://localhost:5000/destination";
 
 type DestinationDetailsPageProps = {
   params: Promise<{ id: string }>;
 };
 
-type DestinationPayload = Destination | { result?: Destination | null };
-
-function isDestination(value: unknown): value is Destination {
-  return (
-    typeof value === "object" &&
-    value !== null &&
-    "_id" in value &&
-    "destinationName" in value
-  );
-}
-
 const getDestination = cache(
   async (id: string): Promise<Destination | null> => {
-    const response = await fetch(
-      `${DESTINATIONS_API}/${encodeURIComponent(id)}`,
-      {
-        cache: "no-store",
-        signal: AbortSignal.timeout(10000),
-      }
-    );
+    if (!/^[0-9a-f]{24}$/i.test(id)) {
+      return null;
+    }
+
+    const response = await fetch(getDestinationUrl(id), {
+      cache: "no-store",
+      signal: AbortSignal.timeout(10000),
+    });
 
     if (response.status === 404) {
       return null;
@@ -43,18 +35,19 @@ const getDestination = cache(
       throw new Error(`Could not load destination (${response.status}).`);
     }
 
-    const payload = (await response.json()) as DestinationPayload | null;
+    const payload: unknown = await response.json();
+    const direct = normalizeDestination(payload);
 
-    if (!payload || typeof payload !== "object") {
-      return null;
+    if (direct) {
+      return direct;
     }
 
-    if (isDestination(payload)) {
-      return payload;
-    }
-
-    if ("result" in payload) {
-      return isDestination(payload.result) ? payload.result : null;
+    if (
+      typeof payload === "object" &&
+      payload !== null &&
+      "result" in payload
+    ) {
+      return normalizeDestination(payload.result);
     }
 
     return null;
@@ -70,16 +63,16 @@ export async function generateMetadata({
     const destination = await getDestination(id);
 
     if (!destination) {
-      return { title: "Destination Not Found — Wonderlast" };
+      return { title: "Destination Not Found — Wanderlast" };
     }
 
     return {
-      title: `${destination.destinationName}, ${destination.country} — Wonderlast`,
+      title: `${destination.destinationName}, ${destination.country} — Wanderlast`,
       description: destination.description,
     };
   } catch (error) {
     unstable_rethrow(error);
-    return { title: "Destination Details — Wonderlast" };
+    return { title: "Destination Details — Wanderlast" };
   }
 }
 
@@ -123,7 +116,7 @@ export default async function DestinationDetailsPage({
 
     return (
       <main className="flex-1 bg-white">
-        <div className="mx-auto w-full max-w-[1200px] px-5 pt-9 pb-20 sm:px-8 lg:px-10 lg:pt-12 lg:pb-24">
+        <div className="mx-auto w-full max-w-300 px-5 pt-9 pb-20 sm:px-8 lg:px-10 lg:pt-12 lg:pb-24">
           <Link
             href="/destinations"
             className="text-xs text-neutral-500 transition-colors hover:text-brand"

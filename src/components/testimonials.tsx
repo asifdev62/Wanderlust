@@ -57,12 +57,9 @@ export function Testimonials() {
             <div className="flex shrink-0 items-center gap-2 pt-1">
               <CarouselPrevious
                 aria-label="Previous testimonials"
-                style={{ position: "static" }}
+                className="static"
               />
-              <CarouselNext
-                aria-label="Next testimonials"
-                style={{ position: "static" }}
-              />
+              <CarouselNext aria-label="Next testimonials" className="static" />
             </div>
           </div>
 

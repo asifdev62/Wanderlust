@@ -3,22 +3,24 @@ import { unstable_rethrow } from "next/navigation";
 import { Suspense } from "react";
 import { CloudOff } from "lucide-react";
 
-import type { Destination } from "@/lib/destinations";
+import {
+  DESTINATIONS_API_URL,
+  normalizeDestination,
+  type Destination,
+} from "@/lib/destinations";
 
 import { DestinationsExplorer } from "./destinations-explorer";
 import { DestinationsExplorerSkeleton } from "./destinations-explorer-skeleton";
 import { RetryButton } from "@/components/retry-button";
 
 export const metadata: Metadata = {
-  title: "Explore All Destinations — Wonderlast",
+  title: "Explore All Destinations — Wanderlast",
   description:
     "Browse our curated collection of travel destinations and find your perfect next adventure.",
 };
 
-const DESTINATIONS_API = "http://localhost:5000/destination";
-
 async function getDestinations(): Promise<Destination[]> {
-  const response = await fetch(DESTINATIONS_API, {
+  const response = await fetch(DESTINATIONS_API_URL, {
     cache: "no-store",
     signal: AbortSignal.timeout(10000),
   });
@@ -27,7 +29,15 @@ async function getDestinations(): Promise<Destination[]> {
     throw new Error(`Could not load destinations (${response.status}).`);
   }
 
-  return response.json();
+  const payload: unknown = await response.json();
+
+  if (!Array.isArray(payload)) {
+    throw new Error("The destination service returned an invalid response.");
+  }
+
+  return payload
+    .map(normalizeDestination)
+    .filter((destination): destination is Destination => destination !== null);
 }
 
 function DestinationsUnavailable() {
@@ -69,7 +79,7 @@ export default function AllDestinationsPage() {
     <main className="flex-1 bg-white">
       <section
         aria-labelledby="destinations-heading"
-        className="mx-auto w-full max-w-[1200px] px-5 pt-10 pb-20 sm:px-8 lg:px-10 lg:pt-14 lg:pb-24"
+        className="mx-auto w-full max-w-300 px-5 pt-10 pb-20 sm:px-8 lg:px-10 lg:pt-14 lg:pb-24"
       >
         <header>
           <h1

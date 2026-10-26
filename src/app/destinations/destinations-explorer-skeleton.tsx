@@ -12,7 +12,7 @@ export function DestinationsExplorerSkeleton() {
           {[0, 1, 2].map((cell) => (
             <div
               key={cell}
-              className="flex h-[58px] flex-col justify-center gap-2 border-b border-neutral-200 px-4 last:border-b-0 sm:border-r sm:border-b-0 sm:px-5 sm:last:border-r-0"
+              className="flex h-14.5 flex-col justify-center gap-2 border-b border-neutral-200 px-4 last:border-b-0 sm:border-r sm:border-b-0 sm:px-5 sm:last:border-r-0"
             >
               <div className="h-2 w-14 animate-pulse bg-neutral-100" />
               <div className="h-3 w-28 animate-pulse bg-neutral-100" />

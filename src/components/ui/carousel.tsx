@@ -102,7 +102,8 @@ function Carousel({
     api.on("select", onSelect)
 
     return () => {
-      api?.off("select", onSelect)
+      api.off("select", onSelect)
+      api.off("reInit", onSelect)
     }
   }, [api, onSelect])
 
@@ -184,6 +185,7 @@ function CarouselPrevious({
   return (
     <Button
       data-slot="carousel-previous"
+      type="button"
       variant={variant}
       size={size}
       className={cn(
@@ -195,10 +197,10 @@ function CarouselPrevious({
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      aria-label="Previous slide"
       {...props}
     >
-      <ChevronLeftIcon />
-      <span className="sr-only">Previous slide</span>
+      <ChevronLeftIcon aria-hidden="true" />
     </Button>
   )
 }
@@ -214,6 +216,7 @@ function CarouselNext({
   return (
     <Button
       data-slot="carousel-next"
+      type="button"
       variant={variant}
       size={size}
       className={cn(
@@ -225,10 +228,10 @@ function CarouselNext({
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      aria-label="Next slide"
       {...props}
     >
-      <ChevronRightIcon />
-      <span className="sr-only">Next slide</span>
+      <ChevronRightIcon aria-hidden="true" />
     </Button>
   )
 }

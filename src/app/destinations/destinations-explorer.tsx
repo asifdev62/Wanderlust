@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import {
   formatCategoryLabel,
+  getDestinationDurationDays,
   getDestinationPrice,
   type Destination,
   type SelectOption,
@@ -75,7 +76,7 @@ function FilterSelect({
     >
       <SelectTrigger
         aria-label={label}
-        className="group h-[58px] w-full items-center justify-between gap-3 rounded-none border-0 bg-transparent px-4 text-left whitespace-normal shadow-none transition-colors hover:bg-neutral-50 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-inset data-[size=default]:h-[58px] sm:px-5"
+        className="group h-14.5 w-full items-center justify-between gap-3 rounded-none border-0 bg-transparent px-4 text-left whitespace-normal shadow-none transition-colors hover:bg-neutral-50 focus-visible:ring-2 focus-visible:ring-brand/30 focus-visible:ring-inset data-[size=default]:h-14.5 sm:px-5"
       >
         <span className="flex min-w-0 flex-col items-start gap-0.5">
           <span
@@ -181,7 +182,9 @@ export function DestinationsExplorer({
       );
     } else if (sortBy === "duration-asc") {
       filtered.sort(
-        (first, second) => Number(first.duration) - Number(second.duration)
+        (first, second) =>
+          getDestinationDurationDays(first.duration) -
+          getDestinationDurationDays(second.duration)
       );
     } else if (sortBy === "name-asc") {
       filtered.sort((first, second) =>

@@ -5,9 +5,8 @@ import {
   CalendarDays,
   Check,
   MapPin,
-  Pencil,
   Star,
-  Trash2,
+  X,
 } from "lucide-react";
 
 import {
@@ -19,6 +18,7 @@ import {
 } from "@/lib/destinations";
 
 import { BookingPanel } from "./booking-panel";
+import EditDestinationDialog from "../EditDestinationDialog";
 
 export function DestinationDetails({
   destination,
@@ -30,7 +30,7 @@ export function DestinationDetails({
   const highlights = getDestinationHighlights(destination.description);
 
   return (
-    <div className="mx-auto w-full max-w-[1200px] px-5 pt-9 pb-20 sm:px-8 lg:px-10 lg:pt-12 lg:pb-24">
+    <div className="mx-auto w-full max-w-300 px-5 pt-9 pb-20 sm:px-8 lg:px-10 lg:pt-12 lg:pb-24">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Link
           href="/destinations"
@@ -45,20 +45,14 @@ export function DestinationDetails({
         </Link>
 
         <div className="flex items-center gap-2.5">
-          <Link
-            href={`/destinations/${destination._id}/edit`}
-            className="inline-flex h-8 items-center gap-2 border border-neutral-200 bg-white px-3.5 text-[11px] font-medium text-neutral-700 transition-colors hover:border-neutral-300 hover:text-brand"
-          >
-            <Pencil aria-hidden="true" className="size-3.5" strokeWidth={1.7} />
-            Edit
-          </Link>
+          <EditDestinationDialog destination={destination} />
 
           <Link
             href="/destinations"
-            className="inline-flex h-8 items-center gap-2 border border-red-200 bg-white px-3.5 text-[11px] font-medium text-red-500 transition-colors hover:border-red-300 hover:bg-red-50 hover:text-red-600"
+            className="inline-flex h-9 items-center gap-2 border border-neutral-200 bg-white px-3.5 text-xs font-medium text-neutral-600 transition-colors hover:border-neutral-300 hover:text-brand"
           >
-            <Trash2 aria-hidden="true" className="size-3.5" strokeWidth={1.7} />
-            Cancel
+            <X aria-hidden="true" className="size-3.5" strokeWidth={1.7} />
+            Close
           </Link>
         </div>
       </div>

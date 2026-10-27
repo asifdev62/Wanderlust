@@ -119,7 +119,7 @@ export function Navbar() {
             Login
           </Link>
           <Link
-            href="#signup"
+            href="/signUp"
             className="text-sm font-medium transition-colors hover:text-brand"
           >
             Sign Up

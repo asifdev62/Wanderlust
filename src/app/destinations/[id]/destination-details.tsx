@@ -16,7 +16,7 @@ import {
   type Destination,
 } from "@/lib/destinations";
 
-import { BookingPanel } from "./booking-panel";
+import { BookingPanel } from "../../../components/booking/booking-panel";
 import { DeleteDestinationDialog } from "../delete-destination-dialog";
 import { EditDestinationDialog } from "../edit-destination-dialog";
 

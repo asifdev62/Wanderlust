@@ -22,7 +22,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <Navbar />
         {children}
-        <Toaster richColors position="top-right" />
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            classNames: {
+              toast: "!font-sans",
+              title: "!text-[13px] !font-semibold !text-neutral-900",
+              description: "!text-xs !text-neutral-500",
+            },
+          }}
+        />
         <Footer />
       </body>
     </html>

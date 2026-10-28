@@ -10,10 +10,25 @@ export const auth = betterAuth({
     client,
   }),
 
-  emailAndPassword:{
+  emailAndPassword: {
     enabled: true,
   },
-  
+
+  user: {
+    additionalFields: {
+      location: {
+        type: "string",
+        required: false,
+        defaultValue: "",
+      },
+      nationality: {
+        type: "string",
+        required: false,
+        defaultValue: "",
+      },
+    },
+  },
+
   // socialProviders:{
   //   google: {
   //       clientId: 

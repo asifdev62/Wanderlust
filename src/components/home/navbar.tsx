@@ -9,6 +9,7 @@ import { Menu, UserRound, X, LogOut, LoaderCircle } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
+import { normalizeImageUrl } from "@/lib/images";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -26,7 +27,6 @@ const navItems = [
   { label: "Destinations", href: "/destinations" },
   { label: "Add Destination", href: "/add-destination" },
   { label: "My Bookings", href: "/myBooking" },
-  { label: "Admin", href: "/admin" },
 ];
 
 function isActivePath(pathname: string, href: string) {
@@ -60,8 +60,9 @@ function UserMenu({
       >
         <Avatar className="size-9 cursor-pointer border border-gray-200">
           <AvatarImage
-            src={user.image ?? undefined}
+            src={normalizeImageUrl(user.image) || undefined}
             alt={user.name ?? "User"}
+            referrerPolicy="no-referrer"
           />
           <AvatarFallback className="bg-[#12A1C2] text-sm font-medium text-white">
             {user.name?.charAt(0).toUpperCase() ?? "U"}
@@ -146,7 +147,7 @@ function AuthLinks({
         )}
       >
         <Link
-          href="/profile"
+          href="/userprofile"
           onClick={onNavigate}
           className="flex min-w-0 items-center gap-2 text-sm font-medium transition-colors hover:text-brand"
         >

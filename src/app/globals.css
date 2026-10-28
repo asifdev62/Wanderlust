@@ -130,3 +130,53 @@
     @apply font-sans;
   }
 }
+
+/* Sonner toasts: soft tinted cards that match the site's status badges
+   (brand teal, emerald, amber, red) with a colored accent strip. */
+[data-sonner-toast][data-styled="true"] {
+  border: 1px solid #e5e5e5 !important;
+  border-left-width: 4px !important;
+  border-left-color: var(--color-brand) !important;
+  border-radius: 10px !important;
+  box-shadow: 0 10px 30px rgb(15 23 42 / 0.08) !important;
+}
+
+[data-sonner-toast][data-type="success"] {
+  background: #f0fafc !important;
+  border-color: #cdeef5 !important;
+  border-left-color: var(--color-brand) !important;
+}
+
+[data-sonner-toast][data-type="success"] [data-icon] {
+  color: var(--color-brand);
+}
+
+[data-sonner-toast][data-type="error"] {
+  background: #fef2f2 !important;
+  border-color: #fecaca !important;
+  border-left-color: #dc2626 !important;
+}
+
+[data-sonner-toast][data-type="error"] [data-icon] {
+  color: #dc2626;
+}
+
+[data-sonner-toast][data-type="warning"] {
+  background: #fffbeb !important;
+  border-color: #fde68a !important;
+  border-left-color: #d97706 !important;
+}
+
+[data-sonner-toast][data-type="warning"] [data-icon] {
+  color: #d97706;
+}
+
+[data-sonner-toast][data-type="info"] {
+  background: #eff6ff !important;
+  border-color: #bfdbfe !important;
+  border-left-color: #0284c7 !important;
+}
+
+[data-sonner-toast][data-type="info"] [data-icon] {
+  color: #0284c7;
+}

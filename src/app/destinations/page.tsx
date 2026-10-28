@@ -11,7 +11,7 @@ import {
 
 import { DestinationsExplorer } from "./destinations-explorer";
 import { DestinationsExplorerSkeleton } from "./destinations-explorer-skeleton";
-import { RetryButton } from "@/components/retry-button";
+import { RetryButton } from "@/components/booking/retry-button";
 
 export const metadata: Metadata = {
   title: "Explore All Destinations — Wanderlast",

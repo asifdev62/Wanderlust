@@ -6,20 +6,19 @@ import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, UserRound, Mail, LockKeyhole } from "lucide-react";
+import { Eye, EyeOff,  Mail, LockKeyhole } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function SignUpPage() {
+export default function SignInpage() {
 
     const router = useRouter();
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSignUp = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setErrorMessage("");
@@ -27,28 +26,18 @@ export default function SignUpPage() {
 
     const formData = new FormData(e.currentTarget);
 
-    const name = String(formData.get("name") ?? "").trim();
     const email = String(formData.get("email") ?? "").trim();
     const password = String(formData.get("password") ?? "");
-    const confirmPassword = String(
-      formData.get("confirmPassword") ?? ""
-    );
-
+ 
     if (password.length < 8) {
       setErrorMessage("Password must be at least 8 characters.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setErrorMessage("Passwords do not match.");
       return;
     }
 
     setLoading(true);
 
     try {
-      const { data, error } = await authClient.signUp.email({
-        name,
+      const { data, error } = await authClient.signIn.email({
         email,
         password,
       });
@@ -56,13 +45,13 @@ export default function SignUpPage() {
       if (error) {
         console.error("Signup error:", error);
         setErrorMessage(
-          error.message || "Unable to create account. Please try again."
+          error.message || "Unable to login. Please try again."
         );
         return;
       }
 
       if (data) {
-        setSuccessMessage("Account created successfully!");
+        setSuccessMessage("Account login successfully!");
         router.push("/");
       }
     } catch (error) {
@@ -85,7 +74,7 @@ export default function SignUpPage() {
       }
     } catch (error) {
       console.error("Google signup error:", error);
-      setErrorMessage("Unable to sign up with Google.");
+      setErrorMessage("Unable to sign In with Google.");
     }
   };
 
@@ -104,7 +93,7 @@ export default function SignUpPage() {
 
         {/* Signup Card */}
         <div className="border border-gray-100 bg-white px-5 py-6 shadow-md sm:px-5.5 sm:py-6">
-          <form onSubmit={handleSignUp} className="space-y-3">
+          <form onSubmit={handleSignIn} className="space-y-3">
            
             {/* Email */}
             <div>

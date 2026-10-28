@@ -127,7 +127,7 @@ export function Navbar() {
         </div>
 
         <Link
-          href="#login"
+          href="/login"
           className="justify-self-end text-sm font-medium lg:hidden"
         >
           Login

@@ -17,12 +17,12 @@ export type SelectOption = {
 
 const DEFAULT_API_BASE_URL = "http://localhost:5000";
 
-const apiBaseUrl = (
+export const API_BASE_URL = (
   process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || DEFAULT_API_BASE_URL
 ).replace(/\/+$/, "");
 
-export const DESTINATIONS_API_URL = `${apiBaseUrl}/destination`;
-export const ADD_DESTINATION_API_URL = `${apiBaseUrl}/add-destination`;
+export const DESTINATIONS_API_URL = `${API_BASE_URL}/destination`;
+export const ADD_DESTINATION_API_URL = `${API_BASE_URL}/add-destination`;
 
 export function getDestinationUrl(id: string) {
   return `${DESTINATIONS_API_URL}/${encodeURIComponent(id)}`;

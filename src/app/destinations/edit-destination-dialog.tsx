@@ -30,6 +30,7 @@ import {
   type Destination,
 } from "@/lib/destinations";
 import { cn } from "@/lib/utils";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const categories = [
   { value: "beach", label: "Beach" },
@@ -101,10 +102,12 @@ export function EditDestinationDialog({
     setStatus(null);
 
     try {
+      const token = await getTokenFromClient()
       const response = await fetch(getDestinationUrl(destination._id), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+           authorization: `Bearer ${token}`
         },
         body: JSON.stringify(payload),
         signal: AbortSignal.timeout(15000),

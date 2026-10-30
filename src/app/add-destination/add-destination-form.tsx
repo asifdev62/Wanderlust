@@ -22,6 +22,7 @@ import {
   readJsonResponse,
 } from "@/lib/destinations";
 import { cn } from "@/lib/utils";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const categories = [
   { value: "beach", label: "Beach" },
@@ -45,58 +46,78 @@ export function AddDestinationForm() {
     message: string;
   } | null>(null);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
 
-    if (isSubmitting) {
-      return;
+async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  if (isSubmitting) return;
+
+
+  const form = event.currentTarget;
+
+ 
+  const formData = new FormData(form);
+  const formValues = Object.fromEntries(formData.entries());
+
+  setIsSubmitting(true);
+  setStatus(null);
+
+  try {
+    const token = await getTokenFromClient()
+    const destinationData = {
+      ...formValues,
+      category,
+      price: Number(formValues.price),
+    };
+
+    console.log("Destination data:", destinationData);
+
+
+    const res = await fetch(ADD_DESTINATION_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(destinationData),
+      signal: AbortSignal.timeout(15000),
+    });
+
+    const responseData = await readJsonResponse(res);
+
+    console.log("API response:", res.status, responseData);
+
+    if (!res.ok) {
+      throw new Error(
+        getApiErrorMessage(
+          responseData,
+          `Could not add destination (${res.status}).`
+        )
+      );
     }
 
-    const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
+    setStatus({
+      tone: "success",
+      message: "Travel package added successfully.",
+    });
 
-    setIsSubmitting(true);
-    setStatus(null);
+   
+    form.reset();
+    setCategory("beach");
+  } catch (error) {
+    console.error("Add destination error:", error);
 
-    try {
-      const res = await fetch(ADD_DESTINATION_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-        signal: AbortSignal.timeout(15000),
-      });
-
-      const responseData = await readJsonResponse(res);
-
-      if (!res.ok) {
-        throw new Error(
-          getApiErrorMessage(
-            responseData,
-            `Could not add destination (${res.status}).`
-          )
-        );
-      }
-
-      setStatus({
-        tone: "success",
-        message: "Travel package added successfully.",
-      });
-      form.reset();
-      setCategory("beach");
-    } catch (error) {
-      setStatus({
-        tone: "error",
-        message:
-          error instanceof Error
-            ? error.message
-            : "Could not reach the server. Please try again.",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
+    setStatus({
+      tone: "error",
+      message:
+        error instanceof Error
+          ? error.message
+          : "Could not add destination. Please try again.",
+    });
+  } finally {
+    setIsSubmitting(false);
   }
+}
 
   return (
     <Card className="w-full max-w-130 gap-0 border border-neutral-200 bg-white py-0 shadow-[0_1px_2px_rgba(0,0,0,0.04)] ring-0">
@@ -286,3 +307,6 @@ export function AddDestinationForm() {
     </Card>
   );
 }
+
+
+

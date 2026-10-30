@@ -11,6 +11,7 @@ import {
   getApiErrorMessage,
   readJsonResponse,
 } from "@/lib/destinations";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 export function CancelBookingButton({
   bookingId,
@@ -26,9 +27,21 @@ export function CancelBookingButton({
     setIsCancelling(true);
 
     try {
+      const token = await getTokenFromClient();
+
+      if (!token) {
+        throw new Error("Authentication token not found. Please sign in again.");
+      }
+
       const response = await fetch(
         `${API_BASE_URL}/bookings/${encodeURIComponent(bookingId)}?email=${encodeURIComponent(email)}`,
-        { method: "DELETE" }
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -50,42 +63,43 @@ export function CancelBookingButton({
           ? error.message
           : "Could not cancel this booking. Please try again."
       );
+
       setIsCancelling(false);
     }
   }
 
- function handleCancel() {
-  if (isCancelling) {
-    return;
-  }
+  function handleCancel() {
+    if (isCancelling) {
+      return;
+    }
 
-  toast("Cancel this booking?", {
-    description: "This cannot be undone.",
-    duration: 8000,
-    classNames: {
-      title: "!text-brand !font-semibold",
-    },
-    action: {
-      label: "Yes, cancel",
-      onClick: () => {
-        void cancelBooking();
+    toast("Cancel this booking?", {
+      description: "This cannot be undone.",
+      duration: 8000,
+      classNames: {
+        title: "!text-brand !font-semibold",
       },
-    },
-    actionButtonStyle: {
-      backgroundColor: "var(--color-brand, #1b9bb8)",
-      color: "#ffffff",
-    },
-    cancel: {
-      label: "Keep it",
-      onClick: () => {},
-    },
-    cancelButtonStyle: {
-      backgroundColor: "transparent",
-      color: "#374151",
-      border: "1px solid #d1d5db",
-    },
-  });
-}
+      action: {
+        label: "Yes, cancel",
+        onClick: () => {
+          void cancelBooking();
+        },
+      },
+      actionButtonStyle: {
+        backgroundColor: "var(--color-brand, #1b9bb8)",
+        color: "#ffffff",
+      },
+      cancel: {
+        label: "Keep it",
+        onClick: () => {},
+      },
+      cancelButtonStyle: {
+        backgroundColor: "transparent",
+        color: "#374151",
+        border: "1px solid #d1d5db",
+      },
+    });
+  }
 
   return (
     <button

@@ -23,6 +23,7 @@ import {
   getDestinationUrl,
   readJsonResponse,
 } from "@/lib/destinations";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 type DeleteDestinationDialogProps = {
   id: string;
@@ -43,8 +44,13 @@ export function DeleteDestinationDialog({ id }: DeleteDestinationDialogProps) {
     setError(null);
 
     try {
+      const token = await getTokenFromClient()
       const res = await fetch(getDestinationUrl(id), {
         method: "DELETE",
+         headers: {
+          "Content-Type": "application/json",
+           authorization: `Bearer ${token}`
+        },
         signal: AbortSignal.timeout(15000),
       });
 

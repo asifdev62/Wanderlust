@@ -11,8 +11,7 @@ import {
 } from "@/lib/destinations";
 
 import { DestinationDetails } from "./destination-details";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+import { getTokenFromSever } from "@/lib/getTokenFromServer";
 
 type DestinationDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -24,13 +23,7 @@ const getDestination = cache(
       return null;
     }
 
-    const jwtToken = await auth.api.getToken({
-      headers: await headers()
-    })
-    const token = jwtToken?.token;
-    console.log(token)
-
-
+     const token = await getTokenFromSever()
     const response = await fetch(getDestinationUrl(id), {
 
       headers:{

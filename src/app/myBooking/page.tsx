@@ -13,13 +13,17 @@ import {
     type Booking,
 } from "@/lib/bookings";
 
+
 export const metadata: Metadata = {
     title: "My Bookings — Wanderlast",
     description: "Manage and view your upcoming travel plans.",
 };
 
+
 async function getBookings(email: string): Promise<Booking[]> {
+    
     const response = await fetch(getMyBookingsUrl(email), {
+        
         cache: "no-store",
         signal: AbortSignal.timeout(10000),
     });
@@ -89,7 +93,9 @@ export default async function MyBookingPage() {
 
     if (email) {
         try {
-            bookings = await getBookings(email);
+      bookings = await getBookings(email);
+
+
         } catch (error) {
             console.error("Could not load bookings:", error);
             failed = true;
@@ -143,3 +149,8 @@ export default async function MyBookingPage() {
         </main>
     );
 }
+
+
+
+
+

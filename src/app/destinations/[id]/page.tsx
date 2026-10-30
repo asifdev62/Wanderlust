@@ -23,8 +23,14 @@ const getDestination = cache(
     }
 
     const response = await fetch(getDestinationUrl(id), {
+
+      headers:{
+        authorization: 'user looged in'
+      },
+
       cache: "no-store",
       signal: AbortSignal.timeout(10000),
+      
     });
 
     if (response.status === 404) {

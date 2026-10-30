@@ -11,6 +11,8 @@ import {
 } from "@/lib/destinations";
 
 import { DestinationDetails } from "./destination-details";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 type DestinationDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -22,10 +24,17 @@ const getDestination = cache(
       return null;
     }
 
+    const jwtToken = await auth.api.getToken({
+      headers: await headers()
+    })
+    const token = jwtToken?.token;
+    console.log(token)
+
+
     const response = await fetch(getDestinationUrl(id), {
 
       headers:{
-        authorization: 'user looged in'
+        authorization: `Bearer ${token}`
       },
 
       cache: "no-store",

@@ -5,7 +5,7 @@ A Next.js App Router travel-destination explorer backed by a small Express + Mon
 ## Requirements
 
 - Node.js 22+
-- The companion API running at `http://localhost:5000` (`../wanderlast_server`)
+- The companion API (deployed, or a local checkout at `../wanderlast_server`)
 
 ## Getting started
 
@@ -16,8 +16,15 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-The API base URL defaults to `http://localhost:5000`. Override it with
-`NEXT_PUBLIC_API_BASE_URL` if the Express server runs elsewhere.
+The API base URL comes from `NEXT_PUBLIC_API_URL`, configured in `.env.local`
+(or the deployment environment). For example:
+
+```env
+NEXT_PUBLIC_API_URL=https://your-api-host.example.com
+```
+
+Use a local backend URL such as `http://localhost:5000` when developing against
+`../wanderlast_server`. The value is read once in `src/lib/api.ts`.
 
 ## Commands
 

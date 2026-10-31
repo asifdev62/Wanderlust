@@ -1,5 +1,9 @@
 import { SiOpencode } from "react-icons/si";
 
+import { API_BASE_URL } from "@/lib/api";
+
+export { API_BASE_URL };
+
 export type Destination = {
   _id: string;
   destinationName: string;
@@ -16,12 +20,6 @@ export type SelectOption = {
   value: string;
   label: string;
 };
-
-const DEFAULT_API_BASE_URL = "http://localhost:5000";
-
-export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_BASE_URL?.trim() || DEFAULT_API_BASE_URL
-).replace(/\/+$/, "");
 
 export const DESTINATIONS_API_URL = `${API_BASE_URL}/destination`;
 export const ADD_DESTINATION_API_URL = `${API_BASE_URL}/add-destination`;

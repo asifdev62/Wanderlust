@@ -11,7 +11,7 @@ import {
 } from "@/lib/destinations";
 
 import { DestinationDetails } from "./destination-details";
-import { getTokenFromSever } from "@/lib/getTokenFromServer";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 type DestinationDetailsPageProps = {
   params: Promise<{ id: string }>;
@@ -23,7 +23,7 @@ const getDestination = cache(
       return null;
     }
 
-     const token = await getTokenFromSever()
+     const token = await getTokenFromServer()
     const response = await fetch(getDestinationUrl(id), {
 
       headers:{

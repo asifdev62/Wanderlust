@@ -1,253 +1,213 @@
-<div align="center">
+# 🌍 Wanderlust — Travel & Booking Platform
 
-# 🌍 Wanderlust
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/React-19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js" />
+  <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+</p>
 
-### Discover Places. Plan Trips. Create Memories.
+<p align="center">
+  <strong>Discover Places. Plan Trips. Create Memories.</strong>
+  <br />
+  A modern full-stack travel destination and booking application.
+</p>
 
-A full-stack travel destination and booking web application built with Next.js, Express.js, and MongoDB.
-
-<a href="https://wanderlust-gamma-pink.vercel.app/">
-  <img src="public/homepage.png" alt="Wanderlust Homepage" width="100%" />
-</a>
-
-
-<p>
+<p align="center">
   <a href="https://wanderlust-gamma-pink.vercel.app/">
-    <strong>🌐 Live Demo</strong>
-  </a>
-  &nbsp; • &nbsp;
-  <a href="https://github.com/asifdev62/Wanderlust">
-    <strong>Frontend Repository</strong>
-  </a>
-  &nbsp; • &nbsp;
-  <a href="https://github.com/asifdev62/wanderlust-server">
-    <strong>Backend Repository</strong>
+    <img src="public/homepage.png" alt="Wanderlust Application Preview" width="100%" />
   </a>
 </p>
 
-<br />
+<p align="center">
+  <a href="https://wanderlust-gamma-pink.vercel.app/"><strong>🌐 Live Demo</strong></a>
+  &nbsp; • &nbsp;
+  <a href="https://github.com/asifdev62/Wanderlust"><strong>Frontend Source</strong></a>
+  &nbsp; • &nbsp;
+  <a href="https://github.com/asifdev62/wanderlust-server"><strong>Backend Source</strong></a>
+</p>
 
-![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)
+---
 
-</div>
+## 📌 Table of Contents
 
-</div>
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [Technology Stack](#-technology-stack)
+- [Application Preview](#-application-preview)
+- [Project Architecture](#-project-architecture)
+- [API Documentation](#-api-documentation)
+- [Database Structure](#-database-structure)
+- [Authentication & Security](#-authentication--security)
+- [Installation & Setup](#-installation--setup)
+- [Environment Variables](#-environment-variables)
+- [Future Improvements](#-future-improvements)
+- [What I Learned](#-what-i-learned)
+- [Author](#-author)
 
-<br />
+## 📖 Overview
 
-## 📖 About The Project
+**Wanderlust** is a full-stack travel destination and booking web application designed to help users explore exciting destinations and manage their travel plans.
 
-**Wanderlust** is a full-stack travel web application that helps users discover destinations and manage travel bookings through a modern and user-friendly interface.
+The platform provides an intuitive interface where users can discover destinations, explore detailed travel information, browse different categories, add destinations, and submit travel bookings.
 
-The application combines a Next.js frontend with an Express.js backend and MongoDB database to handle destination information and booking operations.
+Built with **Next.js, TypeScript, Express.js, and MongoDB**, Wanderlust demonstrates the integration of a modern frontend with a RESTful backend and database.
 
-This project demonstrates my practical learning experience in full-stack web development, REST API integration, database management, and authentication.
+### 🎯 Project Goals
+
+- Build a complete full-stack web application.
+- Create a responsive and user-friendly travel experience.
+- Develop RESTful APIs using Express.js.
+- Integrate MongoDB for persistent data storage.
+- Implement authentication and secure API communication.
+- Deploy frontend and backend services.
 
 ## ✨ Key Features
 
-- 🌍 **Explore Destinations** — Discover travel destinations from different countries.
-- 🗺️ **Destination Details** — View destination descriptions, prices, durations, and other information.
-- 🧭 **Destination Categories** — Explore destinations by categories such as beaches, mountains, cities, adventure, and culture.
-- ➕ **Add Destinations** — Add new destinations to the application.
-- 🎫 **Travel Booking** — Submit bookings for selected destinations.
-- 👤 **Authentication** — Integrate user authentication with Better Auth.
-- 📅 **Booking Management** — Access travel booking information.
-- 📱 **Responsive UI** — Enjoy a layout designed for different screen sizes.
-- 🔗 **REST API Integration** — Connect the frontend to the backend API.
-- 🗄️ **Database Integration** — Store destination and booking information using MongoDB.
+| Feature | Description |
+|---|---|
+| 🌍 Destination Discovery | Explore travel destinations from different countries. |
+| 🗺️ Destination Details | View destination descriptions, prices, and durations. |
+| 🧭 Categories | Discover destinations by travel categories. |
+| ➕ Add Destination | Submit new destination information. |
+| 🎫 Travel Booking | Submit bookings for selected destinations. |
+| 📅 Booking Management | Access travel booking information. |
+| 🔐 User Authentication | Authenticate users with Better Auth. |
+| 🛡️ JWT Integration | Support token-based authentication. |
+| 📱 Responsive Design | Access the application on different screen sizes. |
+| 🔗 REST API | Connect frontend functionality with backend services. |
+| 🗄️ MongoDB Integration | Store destination and booking information. |
 
-## 🛠️ Technologies Used
+## 🛠️ Technology Stack
 
 ### Frontend
 
-- Next.js
-- React
-- TypeScript
-- Tailwind CSS
-- Better Auth
-- Lucide React
+<p>
+  <img src="https://skillicons.dev/icons?i=nextjs,react,ts,tailwind" alt="Frontend Technologies" />
+</p>
+
+- **Next.js** — Full-stack React framework and application routing.
+- **React** — Component-based user interface.
+- **TypeScript** — Type-safe application development.
+- **Tailwind CSS** — Responsive and modern styling.
+- **Better Auth** — User authentication.
+- **Lucide React** — Interface icons.
 
 ### Backend
 
-- Node.js
-- Express.js
-- MongoDB
-- REST API
-- dotenv
-- CORS
+<p>
+  <img src="https://skillicons.dev/icons?i=nodejs,express,mongodb" alt="Backend Technologies" />
+</p>
 
-### Tools & Deployment
+- **Node.js** — JavaScript runtime.
+- **Express.js** — Backend server and REST API development.
+- **MongoDB** — NoSQL database.
+- **JWT** — Token-based authentication.
+- **dotenv** — Environment configuration.
+- **CORS** — Cross-origin resource sharing.
 
-- Git
-- GitHub
+### Development & Deployment
+
+<p>
+  <img src="https://skillicons.dev/icons?i=git,github,vscode,vercel" alt="Development Tools" />
+</p>
+
+- Git & GitHub
 - Visual Studio Code
 - Vercel
 
 ## 🖥️ Application Preview
 
-### Main Application Sections
+### Homepage
 
-- **Home** — Explore the travel application.
-- **Destinations** — Browse available destinations.
-- **Add Destination** — Submit destination information.
-- **My Bookings** — Access booking-related information.
-- **Authentication** — Sign in or create an account.
+<p align="center">
+  <img src="public/homepage.png" alt="Wanderlust Homepage" width="100%" />
+  <em>Wanderlust — Discover your next destination.</em>
+</p>
 
-## 🌐 Live Application
+### Main Application Modules
 
-Visit the deployed application:
+| Module | Purpose |
+|---|---|
+| Home | Explore the travel platform. |
+| Destinations | Browse available destinations. |
+| Add Destination | Add destination information. |
+| My Bookings | Access booking-related information. |
+| Admin | Administrative application section. |
+| Authentication | Sign in and create an account. |
 
-### [🚀 Explore Wanderlust](https://wanderlust-gamma-pink.vercel.app/)
+## 🏗️ Project Architecture
 
-## 📂 Project Repositories
+Wanderlust follows a separate frontend and backend architecture.
+
+```text
+                 ┌──────────────────────┐
+                 │       User           │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │   Next.js Frontend   │
+                 │   React + TypeScript │
+                 └──────────┬───────────┘
+                            │
+                      REST API Requests
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │   Express.js Server │
+                 │      Node.js         │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │      MongoDB         │
+                 │  Destination/Booking │
+                 └──────────────────────┘
+```
+
+### Repository Links
 
 | Repository | Description |
 |---|---|
-| [Wanderlust Frontend](https://github.com/asifdev62/Wanderlust) | Next.js frontend application |
-| [Wanderlust Backend](https://github.com/asifdev62/wanderlust-server) | Express.js backend and REST API |
+| [Wanderlust Frontend](https://github.com/asifdev62/Wanderlust) | Next.js client application |
+| [Wanderlust Backend](https://github.com/asifdev62/wanderlust-server) | Express.js server and API |
 
-## 🚀 Getting Started
+## 🔌 API Documentation
 
-Follow these steps to run Wanderlust locally.
+The Express.js backend provides REST API endpoints for destination and booking operations.
 
-### Prerequisites
+### Destination APIs
 
-Install the following tools:
-
-- Node.js
-- npm
-- MongoDB
-- Git
-
-### 1. Clone the Frontend Repository
-
-```bash
-git clone https://github.com/asifdev62/Wanderlust.git
-```
-
-Navigate to the frontend directory:
-
-```bash
-cd Wanderlust
-```
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-### 2. Configure Frontend Environment Variables
-
-Create a `.env.local` file in the frontend root directory.
-
-Example:
-
-```env
-NEXT_PUBLIC_API_URL=http://localhost:5000
-```
-
-Make sure the variable name matches the one used in your frontend code. Add any other environment variables required by your authentication configuration.
-
-### 3. Run the Frontend
-
-```bash
-npm run dev
-```
-
-Open the application:
-
-```text
-http://localhost:3000
-```
-
-### 4. Clone the Backend Repository
-
-Open a new terminal:
-
-```bash
-git clone https://github.com/asifdev62/wanderlust-server.git
-```
-
-Navigate to the backend directory:
-
-```bash
-cd wanderlust-server
-```
-
-Install the dependencies:
-
-```bash
-npm install
-```
-
-### 5. Configure Backend Environment Variables
-
-Create a `.env` file in the backend root directory.
-
-Example:
-
-```env
-PORT=5000
-MONGODB_URI=your_mongodb_connection_string
-```
-
-Replace `your_mongodb_connection_string` with your MongoDB connection string.
-
-Never commit your actual database credentials or secret keys to GitHub.
-
-### 6. Start the Backend
-
-If your backend defines a `dev` script, run:
-
-```bash
-npm run dev
-```
-
-Otherwise, use the command configured in the backend's `package.json`. For example, if the entry file is `index.js`:
-
-```bash
-node index.js
-```
-
-The backend should be available at:
-
-```text
-http://localhost:5000
-```
-
-## 🔌 API Endpoints
-
-The backend provides the following destination and booking routes.
-
-| HTTP Method | Endpoint | Description |
+| Method | Endpoint | Description |
 |---|---|---|
-| POST | `/add-destination` | Add a destination |
-| GET | `/destination` | Retrieve destinations |
-| GET | `/destination/:id` | Retrieve a destination by ID |
-| POST | `/booking` | Create a booking |
+| `POST` | `/add-destination` | Create a new destination |
+| `GET` | `/destination` | Get all destinations |
+| `GET` | `/destination/:id` | Get destination by ID |
 
-These endpoints reflect the project's documented API structure. Update the table if the backend routes change.
+### Booking API
 
-## 🗄️ Database
+| Method | Endpoint | Description |
+|---|---|---|
+| `POST` | `/booking` | Create a travel booking |
 
-Wanderlust uses MongoDB to store application data.
+<sub>Note: These are the main documented endpoints. Refer to the backend repository for the latest implementation.</sub>
 
-**Database name:** `wanderlast`
+## 🗄️ Database Structure
 
-**Collections:**
+Wanderlust uses **MongoDB** to manage application data.
 
-- `destination` — Stores destination information.
-- `bookings` — Stores travel booking records.
+**Database:** `wanderlast`
 
-### Destination Data
+### Collections
 
-Destination information can include:
+**1. destination**
+
+Stores travel destination information.
+
+Possible fields include:
 
 - Destination name
 - Country
@@ -258,101 +218,198 @@ Destination information can include:
 - Image URL
 - Description
 
-The exact fields depend on the backend implementation.
+**2. bookings**
+
+Stores travel booking records.
+
+Booking information is managed by the backend according to the booking implementation.
 
 ## 🔐 Authentication & Security
 
-Wanderlust integrates Better Auth for user authentication.
+Authentication is integrated using **Better Auth**, with JWT-based authentication support.
 
-Security practices:
+Key security considerations:
 
-- Store sensitive configuration in environment variables.
-- Never expose database credentials or authentication secrets.
-- Configure production environment variables in the deployment platform.
-- Validate incoming API requests on the backend.
-- Configure CORS for the appropriate frontend origin.
-- Protect routes and resources that require authentication.
+- Better Auth for user authentication.
+- JWT integration for token-based API communication.
+- Cookie-based session caching.
+- Protected application resources.
+- Environment variables for sensitive configuration.
+- Backend request validation.
+- CORS configuration for frontend and backend communication.
 
-## 📁 Project Structure
+## 🚀 Installation & Setup
 
-The project uses separate frontend and backend repositories.
+Follow the instructions below to run Wanderlust on your local machine.
 
-### Frontend
+### Prerequisites
 
-```text
-Wanderlust/
-├── public/
-│   └── homepage.png
-├── src/
-│   ├── app/
-│   ├── components/
-│   └── lib/
-├── .env.local
-├── package.json
-├── next.config.ts
-└── README.md
+Make sure you have installed:
+
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [MongoDB](https://www.mongodb.com/)
+- [Git](https://git-scm.com/)
+
+### 1. Clone the Frontend Repository
+
+```bash
+git clone https://github.com/asifdev62/Wanderlust.git
 ```
 
-### Backend
-
-```text
-wanderlust-server/
-├── routes/
-├── .env
-├── index.js
-└── package.json
+```bash
+cd Wanderlust
 ```
 
-This is an illustrative structure. Your actual folders and files may differ.
+### 2. Install Frontend Dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Frontend Environment
+
+Create a `.env.local` file in the frontend root directory.
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+Add any additional environment variables required by your authentication setup.
+
+### 4. Start the Frontend
+
+```bash
+npm run dev
+```
+
+Frontend URL:
+
+```text
+http://localhost:3000
+```
+
+### 5. Clone the Backend Repository
+
+Open another terminal:
+
+```bash
+git clone https://github.com/asifdev62/wanderlust-server.git
+```
+
+```bash
+cd wanderlust-server
+```
+
+### 6. Install Backend Dependencies
+
+```bash
+npm install
+```
+
+### 7. Configure Backend Environment
+
+Create a `.env` file in the backend root directory.
+
+```env
+PORT=5000
+MONGODB_URI=your_mongodb_connection_string
+```
+
+Replace the MongoDB placeholder with your actual connection string and configure any additional required variables.
+
+### 8. Start the Backend
+
+If a development script exists:
+
+```bash
+npm run dev
+```
+
+Otherwise, use the entry-point command defined in your backend project. For example:
+
+```bash
+node index.js
+```
+
+Backend URL:
+
+```text
+http://localhost:5000
+```
+
+<sub>Keep your actual credentials, database connection strings, and authentication secrets private. Never commit `.env` files to GitHub.</sub>
+
+## ⚙️ Environment Variables
+
+### Frontend — `.env.local`
+
+| Variable | Description |
+|---|---|
+| `NEXT_PUBLIC_API_URL` | Backend API base URL |
+
+### Backend — `.env`
+
+| Variable | Description |
+|---|---|
+| `PORT` | Backend server port |
+| `MONGODB_URI` | MongoDB connection string |
+
+Configure additional authentication-related variables according to your actual implementation.
 
 ## 🔮 Future Improvements
 
 - Advanced destination search and filtering.
-- Sorting destinations by price and category.
-- Enhanced booking management.
-- Booking cancellation functionality.
+- Price-based destination sorting.
+- Improved booking management.
+- Booking cancellation.
 - User profile management.
-- An administrative dashboard.
-- Improved loading states and error handling.
-- Additional destination images and travel guides.
+- Enhanced administrative dashboard.
+- Better loading and error states.
+- Additional travel guides and destination content.
 
-## 🎯 What I'm Learning
+## 🎓 What I Learned
 
-Through this project, I am gaining practical experience with:
+Working on Wanderlust helped me develop practical skills in:
 
-- Full-stack web application development.
-- Next.js and React.
-- Building REST APIs with Express.js.
-- Integrating MongoDB.
-- Frontend and backend communication.
-- Authentication integration.
-- Environment configuration.
-- Application deployment with Vercel.
+- Building full-stack applications with Next.js and Express.js.
+- Creating and integrating REST APIs.
+- Managing application data with MongoDB.
+- Implementing authentication with Better Auth.
+- Working with JWT-based authentication.
+- Connecting independent frontend and backend projects.
+- Managing environment variables.
+- Deploying web applications with Vercel.
+- Understanding real-world application architecture.
 
 ## 👨‍💻 Author
 
-### Asif Ali
-
-**Full-Stack Web Developer**
-
-- GitHub: [@asifdev62](https://github.com/asifdev62)
-- Frontend: [Wanderlust](https://github.com/asifdev62/Wanderlust)
-- Backend: [wanderlust-server](https://github.com/asifdev62/wanderlust-server)
-- Live Website: [Wanderlust](https://wanderlust-gamma-pink.vercel.app/)
+<p align="center">
+  <strong>Asif Ali</strong>
+  <br />
+  Full-Stack Web Developer
+  <br /><br />
+  <a href="https://github.com/asifdev62">
+    <img src="https://img.shields.io/badge/GitHub-asifdev62-181717?style=for-the-badge&logo=github" alt="GitHub" />
+  </a>
+  <a href="https://github.com/asifdev62/Wanderlust">
+    <img src="https://img.shields.io/badge/Frontend-Wanderlust-blue?style=for-the-badge&logo=next.js" alt="Frontend" />
+  </a>
+  <a href="https://github.com/asifdev62/wanderlust-server">
+    <img src="https://img.shields.io/badge/Backend-Express.js-green?style=for-the-badge&logo=express" alt="Backend" />
+  </a>
+</p>
 
 ---
 
-<div align="center">
-
-### ✈️ Discover the World with Wanderlust
-
-*Built with ❤️ by Asif Ali*
-
-</div> -->
-
-
-### ✈️ Discover the World with Wanderlust
-
-*Built with ❤️ by Asif Ali*
-
-</div>
+<p align="center">
+  <strong>✈️ Explore More. Travel Further. Create Memories.</strong>
+  <br />
+  <br />
+  <a href="https://wanderlust-gamma-pink.vercel.app/">
+    <img src="https://img.shields.io/badge/Explore%20Wanderlust-Visit%20Live%20Website-D6A85F?style=for-the-badge&logo=vercel&logoColor=white" alt="Explore Wanderlust" />
+  </a>
+  <br />
+  <br />
+  <sub>Designed & Developed with ❤️ by Asif Ali</sub>
+</p>

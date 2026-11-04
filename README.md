@@ -6,13 +6,10 @@
 
 A full-stack travel destination and booking web application built with Next.js, Express.js, and MongoDB.
 
-<br />
-
 <a href="https://wanderlust-gamma-pink.vercel.app/">
   <img src="public/homepage.png" alt="Wanderlust Homepage" width="100%" />
 </a>
 
-<br />
 
 <p>
   <a href="https://wanderlust-gamma-pink.vercel.app/">
@@ -41,7 +38,7 @@ A full-stack travel destination and booking web application built with Next.js, 
 
 </div>
 
----
+<br />
 
 ## 📖 About The Project
 
@@ -92,10 +89,6 @@ This project demonstrates my practical learning experience in full-stack web dev
 - Vercel
 
 ## 🖥️ Application Preview
-
-### Homepage
-
-![Wanderlust Homepage](public/homepage.png)
 
 ### Main Application Sections
 
